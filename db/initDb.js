@@ -6,6 +6,12 @@ if (!fs.existsSync('./db')) {
   fs.mkdirSync('./db');
 }
 
+const user = {
+  userid: 'admin',
+  password: 'admin',
+  // altri campi se serve
+};
+
 const db = new sqlite3.Database('./db/database.db');
 
 db.serialize(() => {
@@ -19,6 +25,17 @@ db.serialize(() => {
     if (err) return console.error("Errore creazione tabella:", err.message);
     console.log("Tabella 'users' creata correttamente (o già esistente).");
   });
+
+  const stmt = db.prepare("INSERT OR REPLACE INTO users (userid, password, email) VALUES (?, ?, ?)");
+  stmt.run(user.userid, user.password, user.email, function(err) {
+    if (err) {
+      console.error("Errore inserimento utente:", err.message);
+    } else {
+      console.log("Utente inserito correttamente");
+    }
+  });
+  stmt.finalize();
+
 });
 
 db.close();
