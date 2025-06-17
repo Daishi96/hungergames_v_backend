@@ -12,7 +12,7 @@ const user = {
   // altri campi se serve
 };
 
-const db = new sqlite3.Database('./tmp/database.db');
+const db = new sqlite3.Database('/tmp/database.db');
 
 db.serialize(() => {
   db.run(`
@@ -27,7 +27,7 @@ db.serialize(() => {
   });
 
   const stmt = db.prepare("INSERT OR REPLACE INTO users (userid, password) VALUES (?, ?)");
-  stmt.run(user.userid, user.password, user.email, function(err) {
+  stmt.run(user.userid, user.password, function(err) {
     if (err) {
       console.error("Errore inserimento utente:", err.message);
     } else {
