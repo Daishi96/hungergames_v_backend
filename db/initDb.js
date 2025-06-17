@@ -12,7 +12,7 @@ const user = {
   // altri campi se serve
 };
 
-const db = new sqlite3.Database('./db/database.db');
+const db = new sqlite3.Database('./tmp/database.db');
 
 db.serialize(() => {
   db.run(`
