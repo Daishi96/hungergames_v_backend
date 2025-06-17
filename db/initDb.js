@@ -1,10 +1,6 @@
 const sqlite3 = require('sqlite3').verbose();
 const fs = require('fs');
 
-// Crea la cartella 'db' se non esiste
-if (!fs.existsSync('./db')) {
-  fs.mkdirSync('./db');
-}
 
 const user = {
   userid: 'admin',
