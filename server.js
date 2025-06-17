@@ -12,13 +12,11 @@ app.use(express.json());
 
 const initDb = require('./db/initDb');
 
-// Connessione al DB
 const db = new sqlite3.Database('/tmp/database.db', (err) => {
   if (err) return console.error(err.message);
   console.log('Connesso al database SQLite');
 
-  // inizializza DB (crea tabelle e utente admin)
-  initDb(db);
+  initDb(db); // usa la funzione e il DB aperto
 });
 
 
