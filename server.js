@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 // Connessione al DB
-const db = new sqlite3.Database('./db/db/database.db', (err) => {
+const db = new sqlite3.Database('/tmp/database.db', (err) => {
   if (err) return console.error(err.message);
   console.log('Connesso al database SQLite');
 });
