@@ -26,7 +26,7 @@ db.serialize(() => {
     console.log("Tabella 'users' creata correttamente (o già esistente).");
   });
 
-  const stmt = db.prepare("INSERT OR REPLACE INTO users (userid, password, email) VALUES (?, ?, ?)");
+  const stmt = db.prepare("INSERT OR REPLACE INTO users (userid, password) VALUES (?, ?)");
   stmt.run(user.userid, user.password, user.email, function(err) {
     if (err) {
       console.error("Errore inserimento utente:", err.message);

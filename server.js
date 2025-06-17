@@ -23,6 +23,8 @@ db.run(`CREATE TABLE IF NOT EXISTS users (
   password TEXT
 )`);
 
+//db.run(`INSERT OR REPLACE INTO users (userid, password) VALUES (?, ?, ?)`);
+
 // Importa le route di login
 const authRoutes = require('./routes/auth')(db);
 app.use('/auth', authRoutes);
