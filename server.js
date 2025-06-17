@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-const initDb = require('./initDb');
+const initDb = require('./db/initDb');
 
 // Connessione al DB
 const db = new sqlite3.Database('/tmp/database.db', (err) => {
