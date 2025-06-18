@@ -24,6 +24,10 @@ const db = new sqlite3.Database('/tmp/database.db', (err) => {
 const authRoutes = require('./routes/auth')(db);
 app.use('/auth', authRoutes);
 
+app.get('/status', (req, res) => {
+  res.json({ status: 'online', timestamp: new Date().toISOString() });
+});
+
 // Avvio server
 app.listen(PORT, () => {
   console.log(`Server attivo sulla porta ${PORT}`);
