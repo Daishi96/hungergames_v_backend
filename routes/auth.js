@@ -1,23 +1,27 @@
 const express = require('express');
-const bcrypt = require('bcryptjs'); // o 'bcrypt'
 
 module.exports = function (db) {
   const router = express.Router();
 
-  // Login
-  router.post('/login', (req, res) => {
+  router.post('/login', async (req, res) => {
     const { userid, password } = req.body;
     if (!userid || !password) return res.status(400).json({ error: 'Credenziali mancanti' });
 
-    db.get(`SELECT * FROM users WHERE userid = ?`, [userid], async (err, row) => {
-      if (err) return res.status(500).json({ error: 'Errore DB' });
-      if (!row) return res.status(401).json({ error: 'Utente non trovato' });
+    try {
+      const result = await db.query('SELECT * FROM users WHERE userid = $1', [userid]);
 
-      const match = (password === row.password);
-      if (!match) return res.status(401).json({ error: 'Password errata' });
+      if (result.rows.length === 0) return res.status(401).json({ error: 'Utente non trovato' });
 
-      res.json({ success: true, userId: row.id });
-    });
+      const user = result.rows[0];
+
+      // Confronto semplice (NON SICURO) password in chiaro
+      if (password !== user.password) return res.status(401).json({ error: 'Password errata' });
+
+      res.json({ success: true, userId: user.id });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Errore DB' });
+    }
   });
 
   return router;
