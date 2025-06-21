@@ -10,7 +10,9 @@ module.exports = function (db) {
     try {
       const result = await db.query('SELECT * FROM users WHERE userid = $1', [userid]);
 
+      console.log('userid ricevuto:', userid);
       if (result.rows.length === 0) return res.status(401).json({ error: 'Utente non trovato' });
+console.log('result.rows:', result.rows);
 
       const user = result.rows[0];
 
