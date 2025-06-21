@@ -1,6 +1,6 @@
 // db.js
+require('dotenv').config();  // carica variabili da .env
 const { Pool } = require('pg');
-DATABASE_URL=postgresql://hungergamesvdb_user:18qJGKXbE4Jh4BYbYNloiNibPpAwERVV@dpg-d1bjk4gdl3ps73ep55rg-a.oregon-postgres.render.com/hungergamesvdb
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
