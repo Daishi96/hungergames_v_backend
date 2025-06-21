@@ -19,6 +19,8 @@ const db = new sqlite3.Database('/tmp/database.db', (err) => {
   initDb(db); // usa la funzione e il DB aperto
 });
 
+const userRoutes = require('./routes/user')(db);
+app.use('/users', userRoutes);
 
 // Importa le route di login
 const authRoutes = require('./routes/auth')(db);

@@ -4,7 +4,10 @@ module.exports = function initDb(db) {
       CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         userid TEXT UNIQUE NOT NULL,
-        password TEXT NOT NULL
+        password TEXT NOT NULL,
+        hp TEXT NOT NULL,
+        stamina TEXT NOT NUL,
+        hunger stamina TEXT NOT NUL
       )
     `, (err) => {
       if (err) return console.error("Errore creazione tabella:", err.message);
@@ -14,10 +17,13 @@ module.exports = function initDb(db) {
     const user = {
       userid: 'admin',
       password: 'admin',
+      hp: '15',
+      stamina: '10',
+      hunger: '20',
     };
 
-    const stmt = db.prepare("INSERT OR REPLACE INTO users (userid, password) VALUES (?, ?)");
-    stmt.run(user.userid, user.password, function(err) {
+    const stmt = db.prepare("INSERT OR REPLACE INTO users (userid, password, hp, stamina, hunger) VALUES (?, ?, ?, ?, ?)");
+    stmt.run(user.userid, user.password, user.hp, user.stamina, user.hunger, function(err) {
       if (err) {
         console.error("Errore inserimento utente:", err.message);
       } else {
