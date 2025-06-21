@@ -32,7 +32,7 @@ module.exports = function initDb(db) {
     });
     stmt.finalize();
 
-db.get("SELECT userid, hp, stamina, hunger FROM users WHERE userid = ?", ['admin'], (err, row) => {
+  db.get("SELECT userid, hp, stamina, hunger FROM users WHERE userid = ?", ['admin'], (err, row) => {
   if (err) {
     console.error("Errore query SELECT:", err.message);
     return;
@@ -40,5 +40,8 @@ db.get("SELECT userid, hp, stamina, hunger FROM users WHERE userid = ?", ['admin
   if (row) {
     console.log("Utente admin trovato:", row);
   }
+
   });
+
 };
+}
