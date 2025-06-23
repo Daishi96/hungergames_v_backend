@@ -21,6 +21,9 @@ app.get('/status', (req, res) => {
   res.json({ status: 'online', timestamp: new Date().toISOString() });
 });
 
+const userRoutes = require('./routes/user')(db);
+app.use('/users', userRoutes);
+
 app.listen(PORT, () => {
   console.log(`Server attivo sulla porta ${PORT}`);
 });

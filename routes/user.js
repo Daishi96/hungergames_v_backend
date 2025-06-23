@@ -24,5 +24,27 @@ module.exports = function (db) {
     }
   });
 
+  // Nuovo endpoint per la cronologia (history) dell’utente
+router.get('/:userid/history', async (req, res) => {
+  const userid = req.params.userid;
+
+  try {
+    const result = await db.query(
+      `SELECT uh.x, uh.y, uh.turno, uh.step, u.userid as username
+       FROM user_history uh
+       JOIN users u ON uh.user_id = u.id
+       WHERE u.id = 1
+       ORDER BY uh.step ASC`,
+      [userid]
+    );
+
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Errore recupero cronologia' });
+  }
+});
+
+
   return router;
 };
