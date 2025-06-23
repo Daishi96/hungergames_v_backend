@@ -33,7 +33,7 @@ router.get('/:userid/history', async (req, res) => {
       `SELECT uh.x, uh.y, uh.turno, uh.step, u.userid as username
        FROM user_history uh
        JOIN users u ON uh.user_id = u.id
-       WHERE u.id = 1
+       WHERE u.userid = $1
        ORDER BY uh.step ASC`,
       [userid]
     );
