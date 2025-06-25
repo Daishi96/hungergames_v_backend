@@ -128,5 +128,27 @@ router.put('/:userid/updateuser', async (req, res) => {
   }
 });
 
+router.post('/sethistory', async (req, res) => {
+  const { user_id, turno, step, x, y } = req.body;
+
+  if (!user_id || turno === undefined || step === undefined || x === undefined || y === undefined) {
+    return res.status(400).json({ error: 'Dati mancanti nel corpo della richiesta' });
+  }
+
+  try {
+    const result = await db.query(
+      `INSERT INTO user_history (user_id, turno, step, x, y)
+       VALUES ($1, $2, $3, $4, $5)
+       RETURNING *`,
+      [user_id, turno, step, x, y]
+    );
+
+    res.status(201).json({ message: 'Inserimento riuscito', record: result.rows[0] });
+  } catch (err) {
+    console.error('Errore durante l\'inserimento nella cronologia:', err);
+    res.status(500).json({ error: 'Errore database durante l\'inserimento' });
+  }
+});
+
   return router;
 };
