@@ -34,7 +34,7 @@ router.get('/:userid/history', async (req, res) => {
 
   try {
     const result = await db.query(
-      `SELECT uh.x, uh.y, uh.turno, uh.step, u.userid, u.coordinate as username
+      `SELECT uh.turno, uh.step, uh.coordinate, u.userid as username
        FROM user_history uh
        JOIN users u ON uh.user_id = u.id
        WHERE u.userid = $1
