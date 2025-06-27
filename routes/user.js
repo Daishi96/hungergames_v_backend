@@ -41,7 +41,7 @@ router.get('/:userid/history', async (req, res) => {
        ORDER BY uh.step ASC`,
       [userid]
     );
-
+    res.status(201).json({ message: 'history', record: result.rows[0] });
     res.json(result.rows);
   } catch (err) {
     console.error(err);
