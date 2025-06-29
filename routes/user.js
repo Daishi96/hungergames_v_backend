@@ -35,10 +35,10 @@ router.get('/:userid/history', async (req, res) => {
   try {
     const result = await db.query(
       `SELECT uh.turno, uh.step, uh.coordinate, u.userid as username
-       FROM user_history uh
-       JOIN users u ON uh.user_id = u.id
-       WHERE u.userid = $1
-       ORDER BY uh.step ASC`,
+        FROM user_history uh
+        JOIN users u ON uh.user_id = u.id
+        WHERE u.userid = $1
+        ORDER BY uh.turno ASC, uh.step ASC;`,
       [userid]
     );
     res.json(result.rows);
