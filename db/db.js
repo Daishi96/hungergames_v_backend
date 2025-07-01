@@ -6,7 +6,7 @@ const pool = new Pool({
   password: 'npg_TsQjn5uAGP0t',
   host: 'ep-divine-field-a9j8wwbv-pooler.gwc.azure.neon.tech',
   port: 5432,
-  database: 'myneondb',
+  database: 'neondb',
   ssl: {
     rejectUnauthorized: false,  // richiesto per Neon
   },
