@@ -1,15 +1,14 @@
-// db.js
-require('dotenv').config();  // carica variabili da .env
+require('dotenv').config();
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  user: 'hungergamesvdb_user',
-  password: '18qJGKXbE4Jh4BYbYNloiNibPpAwERVV',
-  host: 'dpg-d1bjk4gdl3ps73ep55rg-a.oregon-postgres.render.com',
+  user: 'neondb_owner',
+  password: 'npg_TsQjn5uAGP0t',
+  host: 'ep-divine-field-a9j8wwbv-pooler.gwc.azure.neon.tech',
   port: 5432,
-  database: 'hungergamesvdb',
+  database: 'myneondb',
   ssl: {
-    rejectUnauthorized: false,
+    rejectUnauthorized: false,  // richiesto per Neon
   },
 });
 
