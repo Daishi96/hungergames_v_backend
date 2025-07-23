@@ -3,7 +3,7 @@ const express = require('express');
 module.exports = function (db) {
   const router = express.Router();
 
-  router.get('/locations', async (req, res) => {
+  router.get('/', async (req, res) => {
     try {
       const result = await db.query(
         `SELECT id, coordinate, nome, descrizione FROM locations`
