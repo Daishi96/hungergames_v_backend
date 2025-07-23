@@ -16,6 +16,5 @@ module.exports = function (db) {
     }
   });
 
-  // ❗ Serve questo per esportare il router
   return router;
 };

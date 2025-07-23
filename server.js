@@ -18,7 +18,7 @@ const authRoutes = require('./routes/auth')(db);
 app.use('/auth', authRoutes);
 
 const locationsRoutes = require('./routes/locations')(db);
-app.use('/locations', authRoutes);
+app.use('/locations', locationsRoutes);
 
 app.get('/status', (req, res) => {
   res.json({ status: 'online', timestamp: new Date().toISOString() });
