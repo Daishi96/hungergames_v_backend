@@ -43,7 +43,7 @@ router.get('/:userid/history', async (req, res) => {
     );*/
     const result = await db.query(
       'SELECT u.id, u.userid, u."password", u.hp, u.nome, ' +
-      'uh.coordinate AS posizione, ' +
+      'uh.coordinate, ' +
       'u.fame, u.stanchezza, u.arma, u.slotarma, ' +
       'u.armaturatesta, u.armaturatorso, u.armaturabraccia, ' +
       'u.slotbraccia, u.armaturagambe, ' +
