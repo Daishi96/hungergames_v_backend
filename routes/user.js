@@ -33,12 +33,30 @@ router.get('/:userid/history', async (req, res) => {
   const userid = req.params.userid;
 
   try {
-    const result = await db.query(
+    /*const result = await db.query(
       `SELECT uh.turno, uh.step, uh.coordinate, u.userid as username
         FROM user_history uh
         JOIN users u ON uh.user_id = u.id
         WHERE u.userid = $1
         ORDER BY uh.turno ASC, uh.step ASC;`,
+      [userid]
+    );*/
+    const result = await db.query(
+      'SELECT u.id, u.userid, u."password", u.hp, u.nome, ' +
+      'uh.coordinate AS posizione, ' +
+      'u.fame, u.stanchezza, u.arma, u.slotarma, ' +
+      'u.armaturatesta, u.armaturatorso, u.armaturabraccia, ' +
+      'u.slotbraccia, u.armaturagambe, ' +
+      'gs.clima, gs.turno, gs.fascia_oraria ' +
+      'FROM public.users u ' +
+      'CROSS JOIN public.game_status gs ' +
+      'LEFT JOIN LATERAL ( ' +
+      '   SELECT DISTINCT ON (user_id) user_id, turno, step, coordinate ' +
+      '   FROM public.user_history ' +
+      '   WHERE user_id = u.id ' +
+      '   ORDER BY user_id, turno DESC, step DESC ' +
+      ') uh ON true ' +
+      'WHERE u.userid = $1',
       [userid]
     );
     res.json(result.rows);
