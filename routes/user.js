@@ -11,8 +11,8 @@ module.exports = function (db) {
       const result = await db.query(
         'SELECT u.id, u.userid, u."password", u.hp, u.nome, u.posizione, u.fame, u.stanchezza, u.arma, ' +
         'u.slotarma, u.armaturatesta, u.armaturatorso, u.armaturabraccia, u.slotbraccia, u.armaturagambe, ' +
-        'u.inventario, u.boxvirtuale, u.clima, gs.turno, gs.fascia_oraria ' +
-        'FROM public.users u LEFT JOIN public.game_status gs ON u.turno = gs.turno ' +
+        'gs.clima, gs.turno, gs.fascia_oraria ' +
+        'FROM public.users u CROSS JOIN public.game_status gs ' +
         'WHERE u.userid = $1',
         [userid]
       );
